@@ -21,47 +21,5 @@ public class RayScript : MonoBehaviour
         MousePos.z = Camera.main.nearClipPlane;
         WorldPos = Camera.main.ScreenToWorldPoint(MousePos);
         Ray.SetPosition(0, WorldPos);
-        
-        if (Ray.GetPosition(0).x <= -0.3f)
-        {
-            Ray.SetPosition(0, new Vector3(-0.3f, Ray.GetPosition(0).y, Ray.GetPosition(0).z));
-        }
-        if (Ray.GetPosition(0).x >=0.3f)
-        {
-            Ray.SetPosition(0, new Vector3(0.3f, Ray.GetPosition(0).y, Ray.GetPosition(0).z));
-        }
-
-        if (Ray.GetPosition(0).y >= 1.1675f)
-        {
-            Ray.SetPosition(0, new Vector3(Ray.GetPosition(0).x, 1.1675f, Ray.GetPosition(0).z));
-        }
-        if (Ray.GetPosition(0).y <= 0.835f)
-        {
-            Ray.SetPosition(0, new Vector3(Ray.GetPosition(0).x, 0.835f, Ray.GetPosition(0).z));
-        }
-
-
-        if (Ray.GetPosition(1).x <= -0.3f)
-        {
-            Ray.SetPosition(1, new Vector3(-0.3f, Ray.GetPosition(1).y, Ray.GetPosition(1).z));
-        }
-        if (Ray.GetPosition(1).x >= 0.3f)
-        {
-            Ray.SetPosition(1, new Vector3(0.3f, Ray.GetPosition(1).y, Ray.GetPosition(1).z));
-        }
-
-        if (Ray.GetPosition(1).y >= 1.1675f)
-        {
-            Ray.SetPosition(1, new Vector3(Ray.GetPosition(1).x, 1.1675f, Ray.GetPosition(1).z));
-        }
-        if (Ray.GetPosition(1).y <= 0.835f)
-        {
-            Ray.SetPosition(1, new Vector3(Ray.GetPosition(1).x, 0.835f, Ray.GetPosition(1).z));
-        }
-
-        if (Ray.GetPosition(1).x <= 0)
-            Ray.SetPosition(1, new Vector3(0f, Ray.GetPosition(1).y, Ray.GetPosition(1).z));
-
     }
-
 }
