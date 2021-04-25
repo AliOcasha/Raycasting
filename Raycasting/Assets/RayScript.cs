@@ -18,18 +18,17 @@ public class RayScript : MonoBehaviour
     // Update is called once per frame
     private void FixedUpdate()
     {
-        if (C_Offset.x < Offset.x)
-        {
-            C_Offset.x += 0.005f;
-        }
-        if (C_Offset.y < Offset.y)
-        {
-            C_Offset.y += 0.005f;
-        }
+        //if (C_Offset.x < Offset.x)
+        //{
+        //    C_Offset.x += 0.005f;
+        //}
+        //if (C_Offset.y < Offset.y)
+        //{
+        //    C_Offset.y += 0.005f;
+        //}
         MousePos = Input.mousePosition;
         MousePos.z = Camera.main.nearClipPlane;
         WorldPos = Camera.main.ScreenToWorldPoint(MousePos);
         Ray.SetPosition(0, WorldPos);
-        Ray.SetPosition(1, WorldPos + C_Offset);
     }
 }

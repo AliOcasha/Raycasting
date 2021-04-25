@@ -328,7 +328,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3aad57081b637aa4c83806b4d11a91bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Ray: {fileID: 9085889735370917404, guid: 430fe457eb473134fb605c776d9d2101, type: 3}
+  RayPrefab: {fileID: 9085889735370917404, guid: 430fe457eb473134fb605c776d9d2101, type: 3}
+  maxRayCount: 500
 --- !u!4 &1849382589
 Transform:
   m_ObjectHideFlags: 0
