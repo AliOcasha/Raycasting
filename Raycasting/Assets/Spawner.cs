@@ -21,7 +21,7 @@ public class Spawner : MonoBehaviour
             Instantiate(RayPrefab,Vector3.zero, Quaternion.identity);
         }    
     }
-    private void FixedUpdate()
+    private void Update()
     {
         if (currentRadius < maxRadius)
         {
