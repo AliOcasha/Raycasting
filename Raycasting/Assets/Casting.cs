@@ -2,9 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Spawner : MonoBehaviour
+public class Casting : MonoBehaviour
 {
     public GameObject RayPrefab;
+    public LineRenderer Boundary;
+
+    public LineRenderer[] Objects;
     public int maxRayCount = 1000;
 
     private GameObject Ray;
@@ -12,7 +15,7 @@ public class Spawner : MonoBehaviour
     private GameObject[] Rays;
 
     private Vector3 Offset = Vector3.zero;
-    private float maxRadius = 0.1f;
+    private readonly float maxRadius = 0.5f;
     private float currentRadius;
     private void Start()
     { 
@@ -36,6 +39,26 @@ public class Spawner : MonoBehaviour
             Offset.x = Mathf.Sin(i * 2 * Mathf.PI / maxRayCount)*currentRadius;
             Offset.y = Mathf.Cos(i * 2 * Mathf.PI / maxRayCount)*currentRadius;
             LineRenderer.SetPosition(1, LineRenderer.GetPosition(0) + Offset);
+
+            if (LineRenderer.GetPosition(1).x <= -0.3f)
+
+                LineRenderer.SetPosition(1, new Vector3(-0.3f, LineRenderer.GetPosition(1).y, LineRenderer.GetPosition(1).z));
+            
+            if (LineRenderer.GetPosition(1).x >= 0.3f)
+                LineRenderer.SetPosition(1, new Vector3(0.3f, LineRenderer.GetPosition(1).y, LineRenderer.GetPosition(1).z));
+
+            if (LineRenderer.GetPosition(1).y >= 1.1675f)
+                LineRenderer.SetPosition(1, new Vector3(LineRenderer.GetPosition(1).x, 1.1675f, LineRenderer.GetPosition(1).z));
+
+            if (LineRenderer.GetPosition(1).y <= 0.835f)
+                LineRenderer.SetPosition(1, new Vector3(LineRenderer.GetPosition(1).x, 0.835f, LineRenderer.GetPosition(1).z));
+
+            intersection(LineRenderer.GetPosition(0), LineRenderer.GetPosition(1));
         }
+    }
+
+    private void intersection( Vector3 r1, Vector3 r2)
+    {
+        float steigungr = r2.x - r1.x / r2.y - r1.y; 
     }
 }
