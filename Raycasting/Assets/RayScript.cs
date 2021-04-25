@@ -8,8 +8,6 @@ public class RayScript : MonoBehaviour
     private Vector3 MousePos;
     private Vector3 WorldPos;
 
-    private Vector3 RayPos = Vector3.zero;
-
     private void Start()
     {
         Ray = gameObject.GetComponent<LineRenderer>();
@@ -21,6 +19,24 @@ public class RayScript : MonoBehaviour
         MousePos.z = Camera.main.nearClipPlane;
         WorldPos = Camera.main.ScreenToWorldPoint(MousePos);
         Ray.SetPosition(0, WorldPos);
+        
+        if (Ray.GetPosition(0).x <= -0.3f)
+        {
+            Ray.SetPosition(0, new Vector3(-0.3f, Ray.GetPosition(0).y, Ray.GetPosition(0).z));
+        }
+        if (Ray.GetPosition(0).x >=0.3f)
+        {
+            Ray.SetPosition(0, new Vector3(0.3f, Ray.GetPosition(0).y, Ray.GetPosition(0).z));
+        }
+
+        if (Ray.GetPosition(0).y >= 1.1675f)
+        {
+            Ray.SetPosition(0, new Vector3(Ray.GetPosition(0).x, 1.1675f, Ray.GetPosition(0).z));
+        }
+        if (Ray.GetPosition(0).y <= 0.835f)
+        {
+            Ray.SetPosition(0, new Vector3(Ray.GetPosition(0).x, 0.835f, Ray.GetPosition(0).z));
+        }
     }
 
 }
