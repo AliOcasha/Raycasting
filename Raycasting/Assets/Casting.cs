@@ -16,7 +16,9 @@ public class Casting : MonoBehaviour
     private Vector3 Offset = Vector3.zero;
     private Vector3 B_Offset = new Vector3(-1.5f, -4f,0f);
     private float Radius = 0.1f;
+    private float cRadius;
     public float Length = 1;
+    private float cLength;
     private void Start()
     { 
         for (int i = 0; i < maxRayCount; i++)
@@ -33,21 +35,21 @@ public class Casting : MonoBehaviour
             Offset.x = Mathf.Sin(i * 2 * Mathf.PI / maxRayCount);
             Offset.y = Mathf.Cos(i * 2 * Mathf.PI / maxRayCount);
             Ray.SetPosition(1, Ray.GetPosition(0) + Offset*Radius);
-            Boundary.SetPosition(1, Boundary.GetPosition(0) + B_Offset*Length);
-            if (B_Offset != Offset)
+            Boundary.SetPosition(1, Boundary.GetPosition(0) + B_Offset);
+            cLength = (Offset.x * (Boundary.GetPosition(0).y - Ray.GetPosition(0).y) + Offset.y * (Ray.GetPosition(0).x - Boundary.GetPosition(0).x)) / (B_Offset.x * Offset.y - B_Offset.y * Offset.x);
+            cRadius = (Boundary.GetPosition(0).x + B_Offset.x * Length - Ray.GetPosition(0).x) / Offset.x;
+
+            if (cRadius > 0 )
             {
-                // Isolate T1 for both equations, getting rid of T1
-                T1 = (s_px + s_dx * T2 - r_px) / r_dx = (s_py + s_dy * T2 - r_py) / r_dy
-
-                // Multiply both sides by r_dx * r_dy
-                s_px* r_dy +s_dx * T2 * r_dy - r_px * r_dy = s_py * r_dx + s_dy * T2 * r_dx - r_py * r_dx
-
-                // Solve for T2!
-                T2 = (r_dx * (s_py - r_py) + r_dy * (r_px - s_px)) / (s_dx * r_dy - s_dy * r_dx)
-
-                // Plug the value of T2 to get T1
-                T1 = (s_px + s_dx * T2 - r_px) / r_dx
+                Radius = cRadius;
             }
+            else
+            {
+                Radius = 2.5f;
+            }
+
+            Debug.Log("Length: " + Length);
+            Debug.Log("Radius: " + Radius);
         }
     }
 }

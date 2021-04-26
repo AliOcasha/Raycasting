@@ -458,10 +458,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RayPrefab: {fileID: 9085889735370917404, guid: 430fe457eb473134fb605c776d9d2101, type: 3}
-  Boundary: {fileID: 0}
+  Boundary: {fileID: 32414278}
   Objects:
   - {fileID: 32414278}
-  maxRayCount: 50
+  maxRayCount: 100
+  Length: 1
 --- !u!4 &1849382589
 Transform:
   m_ObjectHideFlags: 0
