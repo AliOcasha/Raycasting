@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3814510763495259025}
   - component: {fileID: 601346325379369082}
-  - component: {fileID: 4666266141542132224}
+  - component: {fileID: -8194598599641708149}
   m_Layer: 0
   m_Name: Ray
   m_TagString: Ray
@@ -77,7 +77,7 @@ LineRenderer:
   - {x: 0, y: 0, z: 0}
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 0.0005
+    widthMultiplier: 0.001
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -130,7 +130,7 @@ LineRenderer:
     generateLightingData: 1
   m_UseWorldSpace: 1
   m_Loop: 0
---- !u!114 &4666266141542132224
+--- !u!114 &-8194598599641708149
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -139,9 +139,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 9085889735370917404}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bdedab9849f73514d8d93842d4327b34, type: 3}
+  m_Script: {fileID: 11500000, guid: 27eb68e90f8f9754e90e02a5221127a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Objects:
-  - {fileID: 4645065155710102637, guid: a75d0d01b0103bd499e17a39eb433075, type: 3}
-  - {fileID: 316419842105957013, guid: 18bd417bdbbada1468a6f15d94253c09, type: 3}

@@ -181,11 +181,11 @@ LineRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Positions:
-  - {x: 1.5, y: 2, z: 0}
-  - {x: 0, y: -2, z: 0}
+  - {x: 3, y: 2, z: 0}
+  - {x: 2, y: -2, z: 0}
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 1
+    widthMultiplier: 4
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -315,7 +315,7 @@ Light:
   m_Cookie: {fileID: 0}
   m_DrawHalo: 0
   m_Flare: {fileID: 0}
-  m_RenderMode: 0
+  m_RenderMode: 2
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -454,15 +454,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1849382587}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3aad57081b637aa4c83806b4d11a91bb, type: 3}
+  m_Script: {fileID: 11500000, guid: 82ff131aaef48c443ad6b800890b9b3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxRayCount: 1000
   RayPrefab: {fileID: 9085889735370917404, guid: 430fe457eb473134fb605c776d9d2101, type: 3}
+  Rays: {fileID: -8194598599641708149, guid: 430fe457eb473134fb605c776d9d2101, type: 3}
   Boundary: {fileID: 32414278}
-  Objects:
-  - {fileID: 32414278}
-  maxRayCount: 100
-  Length: 1
 --- !u!4 &1849382589
 Transform:
   m_ObjectHideFlags: 0
