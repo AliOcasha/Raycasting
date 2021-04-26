@@ -52,7 +52,7 @@ public class Physics : MonoBehaviour
         cLength = (Boundary.GetPosition(0).x + B_Direction.x * u - R.GetPosition(0).x) / Direction.x;
         // Only Apply Resicing when Ray is poiting in right direction
         // Limpiting Ray Length to 5 cause of Unity not liking infinite Rays
-        if (cLength < 0)
+        if (cLength > 0)
         {
             if (cLength < 5)
                 Length = cLength;
