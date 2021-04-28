@@ -18,30 +18,30 @@ class Ray:
        
 
    def move(self):
-       self.rawpos = (10, 10)
-       self.xr = self.rawpos[0] - WIN_WIDTH/2
-       self.yr = self.rawpos[1] - WIN_HEIGHT/2
+       self.rawpos = pg.mouse.get_pos()
+       self.xr = self.rawpos[0]
+       self.yr = self.rawpos[1]
        self.rawpos = (self.xr, self.yr)
 
 
    def draw(self, screen):
        screen.fill((0,0,0))        
-       self.x = self.rawpos[0] * self.factor + WIN_WIDTH/2 + pg.mouse.get_pos()[0]
-       self.y = self.rawpos[1] * self.factor + WIN_HEIGHT/2 + pg.mouse.get_pos()[1]
+       self.x = self.rawpos[0] + 100* self.factor
+       self.y = self.rawpos[1] + 50* self.factor
        self.pos = (self.x, self.y)      
        pg.draw.line(screen, WHITE, pg.mouse.get_pos(), self.pos)
 
    def checkIntersection(self, Wall):
-       WallIntersectionParameter = (self.rawpos[0]*(Wall.p1[1]-WIN_HEIGHT/2) + self.rawpos[1]*(WIN_WIDTH/2-Wall.p1[0]))/((Wall.p2[0]-Wall.p1[0])*self.rawpos[1] - (Wall.p2[1]-Wall.p1[1])*self.rawpos[0])
+       WallIntersectionParameter = (self.rawpos[0]*(Wall.p1[1]-pg.mouse.get_pos()[1]) + self.rawpos[1]*(pg.mouse.get_pos()[0]-Wall.p1[0]))/((Wall.p2[0]-Wall.p1[0])*self.rawpos[1] - (Wall.p2[1]-Wall.p1[1])*self.rawpos[0])
 
        if WallIntersectionParameter > 0 and WallIntersectionParameter < 1:
-           RayIntersection = (Wall.p1[0]+(Wall.p2[0]-Wall.p1[0])*WallIntersectionParameter-WIN_WIDTH/2)/self.rawpos[0]
+           RayIntersection = (Wall.p1[0]+(Wall.p2[0]-Wall.p1[0])*WallIntersectionParameter-pg.mouse.get_pos()[0])/self.rawpos[0]
            if RayIntersection > 0:
                self.factor = RayIntersection
            else:
                self.factor = 10
-               self.x = self.rawpos[0] * self.factor + WIN_WIDTH/2
-               self.y = self.rawpos[1] * self.factor + WIN_HEIGHT/2
+               self.x = self.rawpos[0] + 100* self.factor
+               self.y = self.rawpos[1] + 50* self.factor
                self.pos = (self.x, self.y)
 
 
