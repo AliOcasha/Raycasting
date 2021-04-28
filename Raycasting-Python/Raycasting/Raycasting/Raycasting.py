@@ -27,7 +27,7 @@ class Ray:
    def draw(self, screen):
        screen.fill((0,0,0))        
        self.x = self.rawpos[0] + 100* self.factor
-       self.y = self.rawpos[1] + 50* self.factor
+       self.y = self.rawpos[1] + 0 * self.factor
        self.pos = (self.x, self.y)      
        pg.draw.line(screen, WHITE, pg.mouse.get_pos(), self.pos)
 
