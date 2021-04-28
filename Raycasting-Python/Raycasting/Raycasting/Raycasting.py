@@ -9,7 +9,7 @@ WHITE = (255, 255, 255)
 class Ray:
    def __init__(self):
        self.pos = (WIN_WIDTH/2, WIN_HEIGHT/2)
-       self.rawpos = pg.mouse.get_pos()
+       self.rawpos = (0,0)
        self.x = 0.1
        self.y = 0.1
        self.xr = 0.1
@@ -18,18 +18,18 @@ class Ray:
        
 
    def move(self):
-       self.rawpos = pg.mouse.get_pos()
-       self.xr = pg.mouse.get_pos()[0] - WIN_WIDTH/2
-       self.yr = pg.mouse.get_pos()[1] - WIN_HEIGHT/2
+       self.rawpos = (10, 10)
+       self.xr = self.rawpos[0] - WIN_WIDTH/2
+       self.yr = self.rawpos[1] - WIN_HEIGHT/2
        self.rawpos = (self.xr, self.yr)
 
 
    def draw(self, screen):
        screen.fill((0,0,0))        
-       self.x = self.rawpos[0] * self.factor + WIN_WIDTH/2
-       self.y = self.rawpos[1] * self.factor + WIN_HEIGHT/2
+       self.x = self.rawpos[0] * self.factor + WIN_WIDTH/2 + pg.mouse.get_pos()[0]
+       self.y = self.rawpos[1] * self.factor + WIN_HEIGHT/2 + pg.mouse.get_pos()[1]
        self.pos = (self.x, self.y)      
-       pg.draw.line(screen, WHITE, (WIN_WIDTH/2, WIN_HEIGHT/2), self.pos)
+       pg.draw.line(screen, WHITE, pg.mouse.get_pos(), self.pos)
 
    def checkIntersection(self, Wall):
        WallIntersectionParameter = (self.rawpos[0]*(Wall.p1[1]-WIN_HEIGHT/2) + self.rawpos[1]*(WIN_WIDTH/2-Wall.p1[0]))/((Wall.p2[0]-Wall.p1[0])*self.rawpos[1] - (Wall.p2[1]-Wall.p1[1])*self.rawpos[0])
