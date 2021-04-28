@@ -66,7 +66,7 @@ def main():
     screen = pg.display.set_mode((WIN_WIDTH, WIN_HEIGHT))
     clock = pg.time.Clock()
 
-    Line = Ray()
+    ray = Ray()
     Walls = [Boundary((200,150), (250,500))]
 
     while Run:
@@ -76,8 +76,8 @@ def main():
                 Run = False
                 pg.quit()
                 sys.exit(0)
-        Line.move()
-        Line.checkIntersection(Walls[0])
-        Draw_Window(screen, Line, Walls)
+        ray.move()
+        ray.checkIntersection(Walls[0])
+        Draw_Window(screen, ray, Walls)
 
 main()
