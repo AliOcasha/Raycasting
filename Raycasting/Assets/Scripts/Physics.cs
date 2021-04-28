@@ -48,17 +48,11 @@ public class Physics : MonoBehaviour
     {
         // Trying to Detect a Collision with a Boundary and modifying Length as Reaction
         // NOT WORKING -- Currently makin invisble Barrier in middle of Screen
-        u = B.GetPosition(0).x;
-        cLength = (Boundary.GetPosition(0).x + B_Direction.x * u - R.GetPosition(0).x) / Direction.x;
-        // Only Apply Resicing when Ray is poiting in right direction
-        // Limpiting Ray Length to 5 cause of Unity not liking infinite Rays
+        u = R.GetPosition(1).x*((B.GetPosition(0).y - R.GetPosition(0).y) + R.GetPosition(1).y*(R.GetPosition(0).x - B.GetPosition(0).x))/((B.GetPosition(1).y-B.GetPosition(0).x)*R.GetPosition(1).y - (B.GetPosition(1).y - B.GetPosition(0).y*R.GetPosition(1).x));
+        if (u > 0 && u < 1)
+            cLength = (Boundary.GetPosition(0).x + (B.GetPosition(1).x-B.GetPosition(0).x) * u - R.GetPosition(0).x) / R.GetPosition(1).x;
         if (cLength > 0)
-        {
-            if (cLength < 5)
-                Length = cLength;
-            else
-                Length = 5;
-        }
+            Length = cLength;
         else
             Length = 5;
     }
