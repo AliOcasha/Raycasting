@@ -77,6 +77,7 @@ def main():
     clock = pg.time.Clock()
 
     rays = [Ray()]
+
     Walls = [Boundary((200,150), (200,500)),
              Boundary((400,200), (250,200)),
              Boundary((300,700), (300,300)),
