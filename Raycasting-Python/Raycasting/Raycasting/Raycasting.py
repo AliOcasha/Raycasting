@@ -20,8 +20,12 @@ class Ray:
 
    def move(self):
        self.rawpos = pg.mouse.get_pos()
-       self.xr = pg.mouse.get_pos()[0] - WIN_WIDTH/2
-       self.yr = pg.mouse.get_pos()[1] - WIN_HEIGHT/2
+       self.xr = (pg.mouse.get_pos()[0] - WIN_WIDTH/2)
+       if self.xr == 0:
+           self.xr = 0.1
+       self.yr = (pg.mouse.get_pos()[1] - WIN_HEIGHT/2)
+       if self.yr == 0:
+           self.yr = 0.1
        self.rawpos = (self.xr, self.yr)
 
 
@@ -35,7 +39,13 @@ class Ray:
    def checkIntersection(self, Walls):
        self.fl = [100]
        for Wall in Walls:
-           WallIntersectionParameter = (self.rawpos[0]*(Wall.p1[1]-WIN_HEIGHT/2) + self.rawpos[1]*(WIN_WIDTH/2-Wall.p1[0]))/((Wall.p2[0]-Wall.p1[0])*self.rawpos[1] - (Wall.p2[1]-Wall.p1[1])*self.rawpos[0])
+           WallZaehler = self.rawpos[0]*(Wall.p1[1]-WIN_HEIGHT/2) + self.rawpos[1]*(WIN_WIDTH/2-Wall.p1[0])
+           WallNenner = (Wall.p2[0]-Wall.p1[0])*self.rawpos[1] - (Wall.p2[1]-Wall.p1[1])*self.rawpos[0]
+           print(WallZaehler)
+           print(WallNenner)
+
+           WallIntersectionParameter = WallZaehler/WallNenner
+
            if WallIntersectionParameter > 0 and WallIntersectionParameter < 1:
                RayIntersection = (Wall.p1[0]+(Wall.p2[0]-Wall.p1[0])*WallIntersectionParameter-WIN_WIDTH/2)/self.rawpos[0]
                if RayIntersection > 0:
@@ -55,8 +65,9 @@ class Boundary:
     def draw(self, screen):
         pg.draw.line(screen, WHITE, self.p1, self.p2, self.Boundary_Thickness)
 
-def Draw_Window(screen, Line, Boundaries):
-    Line.draw(screen)
+def Draw_Window(screen, Rays, Boundaries):
+    for R in Rays:
+        R.draw(screen)
 
     for B in Boundaries:
         B.draw(screen)
@@ -67,10 +78,11 @@ def main():
     screen = pg.display.set_mode((WIN_WIDTH, WIN_HEIGHT))
     clock = pg.time.Clock()
 
-    ray = Ray()
+    rays = [Ray()]
     Walls = [Boundary((200,150), (250,500)),
              Boundary((400,200), (50,300)),
-             Boundary((600,550), (800,450))]
+             Boundary((600,550), (800,450)),
+             Boundary((100,800), (700, 750))]
 
     while Run:
         clock.tick(30)
@@ -79,8 +91,9 @@ def main():
                 Run = False
                 pg.quit()
                 sys.exit(0)
-        ray.move()
-        ray.checkIntersection(Walls)
-        Draw_Window(screen, ray, Walls)
+        for ray in rays:
+            ray.move()
+            ray.checkIntersection(Walls)
+        Draw_Window(screen, rays, Walls)
 
 main()
