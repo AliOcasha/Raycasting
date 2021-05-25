@@ -41,8 +41,6 @@ class Ray:
        for Wall in Walls:
            WallZaehler = self.rawpos[0]*(Wall.p1[1]-WIN_HEIGHT/2) + self.rawpos[1]*(WIN_WIDTH/2-Wall.p1[0])
            WallNenner = (Wall.p2[0]-Wall.p1[0])*self.rawpos[1] - (Wall.p2[1]-Wall.p1[1])*self.rawpos[0]
-           print(WallZaehler)
-           print(WallNenner)
 
            WallIntersectionParameter = WallZaehler/WallNenner
 
@@ -79,10 +77,17 @@ def main():
     clock = pg.time.Clock()
 
     rays = [Ray()]
-    Walls = [Boundary((200,150), (250,500)),
-             Boundary((400,200), (50,300)),
-             Boundary((600,550), (800,450)),
-             Boundary((100,800), (700, 750))]
+
+    Walls = [Boundary((200,150), (200,500)),
+             Boundary((400,200), (250,200)),
+             Boundary((300,700), (300,300)),
+             Boundary((250,800), (650,800)),
+             Boundary((200,150), (300,150)),
+             Boundary((500,600), (750,600)),
+             Boundary((600,200), (600,450)),
+             Boundary((600,200), (650,200)),
+             Boundary((650,200), (650,100)),
+             Boundary((650,100), (300,100))]
 
     while Run:
         clock.tick(30)
