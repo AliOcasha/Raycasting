@@ -36,6 +36,7 @@ class Ray:
 
    def draw(self, screen):
        #Clear the previous by drawing black over it before updating End
+       ## For some fun comment this line
        pg.draw.line(screen, BLACK, self.Source, self.End)
        #Setting the x and y End of Ray Coordinates by mutipying the direction with the factor ( and adding the Half window cause of pygame)
        self.x = self.direction[0] * self.factor + self.Source[0]
