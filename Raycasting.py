@@ -6,17 +6,19 @@ WIN_WIDTH = 900
 WIN_HEIGHT = 900
 
 WHITE = (255, 255, 255)
+BLACK = (0,0,0)
 
 class Ray:
-   def __init__(self):
+   def __init__(self,pos):
        #Beginning Positions
-       self.Source = (WIN_WIDTH/2, WIN_HEIGHT/2)
+       self.Source = pos
        self.direction = pg.mouse.get_pos()
        # "Real" Positions of Lightray
        self.x = 0
        self.y = 0
        self.xs = 0
        self.ys = 0
+       self.End = (self.x, self.y)
        # Default Rayfactor
        self.factor = 1000
        # List to compare RayIntersection lenghts
@@ -27,28 +29,27 @@ class Ray:
        #Always set the direction to the mouse position
        self.direction = pg.mouse.get_pos()
        #Set the x and y coordinate of the source to the middle and put them in direction tuple
-       self.xs = (pg.mouse.get_pos()[0] - WIN_WIDTH/2)
-       self.ys = (pg.mouse.get_pos()[1] - WIN_HEIGHT/2)
+       self.xs = (pg.mouse.get_pos()[0] - self.Source[0])
+       self.ys = (pg.mouse.get_pos()[1] - self.Source[1])
        self.direction = (self.xs, self.ys)
 
 
    def draw(self, screen):
-       #Update the background with black so you just see the new line, commeting this gives a cool effect
-       screen.fill((0,0,0))
+       #Clear the previous by drawing black over it before updating End
+       pg.draw.line(screen, BLACK, self.Source, self.End)
        #Setting the x and y End of Ray Coordinates by mutipying the direction with the factor ( and adding the Half window cause of pygame)
-       self.x = self.direction[0] * self.factor + WIN_WIDTH/2
-       self.y = self.direction[1] * self.factor + WIN_HEIGHT/2
+       self.x = self.direction[0] * self.factor + self.Source[0]
+       self.y = self.direction[1] * self.factor + self.Source[1]
        #putting x and y in End tuple and draw the line on the screen
        self.End = (self.x, self.y) 
        pg.draw.line(screen, WHITE, self.Source, self.End)
 
    def checkIntersection(self, Walls):
-       print(str(self.direction[0])+ " | " + str(self.direction[1]))
        #Reset List to default Rayfactor
        self.f_list = [1000]
        #Check the Intersection Point with every Wall (Analytische Geometrie)
        for Wall in Walls:
-           WallZaehler = self.direction[0]*(Wall.p1[1]-WIN_HEIGHT/2) + self.direction[1]*(WIN_WIDTH/2-Wall.p1[0])
+           WallZaehler = self.direction[0]*(Wall.p1[1]-self.Source[1]) + self.direction[1]*(self.Source[0]-Wall.p1[0])
            WallNenner = (Wall.p2[0]-Wall.p1[0])*self.direction[1] - (Wall.p2[1]-Wall.p1[1])*self.direction[0]
            try:
                 WallIntersectionParameter = WallZaehler/WallNenner
@@ -58,9 +59,9 @@ class Ray:
         #If Intersection Point valid for physical Intersection get the Ray Intersection point
            if WallIntersectionParameter > 0 and WallIntersectionParameter <= 1:
                try:
-                   RayIntersection = (Wall.p1[0]+(Wall.p2[0]-Wall.p1[0])*WallIntersectionParameter-WIN_WIDTH/2)/self.direction[0]
+                   RayIntersection = (Wall.p1[0]+(Wall.p2[0]-Wall.p1[0])*WallIntersectionParameter-self.Source[0])/self.direction[0]
                except ZeroDivisionError:
-                   RayIntersection = (Wall.p1[0]+(Wall.p2[0]-Wall.p1[0])*WallIntersectionParameter-WIN_WIDTH/2)/0.001
+                   RayIntersection = (Wall.p1[0]+(Wall.p2[0]-Wall.p1[0])*WallIntersectionParameter-self.Source[0])/0.001
                if RayIntersection > 0:
                    # Add RayIntersection point to list
                    if RayIntersection in self.f_list:
@@ -96,7 +97,7 @@ def main():
     clock = pg.time.Clock()
 
     #Create one Ray and the Walls
-    rays = [Ray()]
+    rays = [Ray((500, 300)), Ray((WIN_WIDTH/2, WIN_HEIGHT/2)), Ray((WIN_WIDTH, WIN_HEIGHT))]
     Walls = [Boundary((200,150), (200,500)),
              Boundary((400,200), (250,200)),
              Boundary((300,700), (300,300)),
@@ -119,7 +120,6 @@ def main():
         for ray in rays:
             ray.move()
             ray.checkIntersection(Walls)
-
         #Draw
         Draw_Window(screen, rays, Walls)
 
