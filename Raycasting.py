@@ -1,12 +1,14 @@
 import pygame as pg
 import sys
+import math
 
 import Objects
-import Maths
+import Collision
 pg.init()
 
 WIN_WIDTH = 900
 WIN_HEIGHT = 900
+STANDART_LENGTH = 100
 
 def createWalls():
     Walls = [Objects.Boundary((200,150), (200,500)),
@@ -22,7 +24,24 @@ def createWalls():
     return Walls
 
 def createRays():
-    rays = [Objects.Ray((WIN_WIDTH/2, WIN_HEIGHT/2))]    
+    rays = [Objects.Ray(list((-1,0))),
+            Objects.Ray(list((1,0))),
+            Objects.Ray(list((1,1))),
+            Objects.Ray(list((1.5,1))),
+            Objects.Ray(list((2.5,1))),
+            Objects.Ray(list((4,1))),
+            Objects.Ray(list((-1,-1))),
+            Objects.Ray(list((-1.5,-1))),
+            Objects.Ray(list((-2.5,-1))),
+            Objects.Ray(list((-4,-1))),
+            Objects.Ray(list((1,-1))),
+            Objects.Ray(list((1.5,-1))),
+            Objects.Ray(list((2.5,-1))),
+            Objects.Ray(list((4,-1))),
+            Objects.Ray(list((-1,1))),
+            Objects.Ray(list((-1.5,1))),
+            Objects.Ray(list((-2.5,1))),
+            Objects.Ray(list((-4,1)))]    
     return rays   
 
 def Draw_Window(screen, Rays, Boundaries):
@@ -51,8 +70,8 @@ def main():
                 sys.exit(0)
         # Update Ray Position and Intersection points
         for ray in Rays:
-            ray.move()
-            Maths.checkIntersection(Walls,ray)
+            Collision.checkIntersection(Walls,ray)
+
         #Draw
         Draw_Window(screen, Rays, Walls)
 
