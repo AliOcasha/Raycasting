@@ -24,24 +24,31 @@ def createWalls():
     return Walls
 
 def createRays():
-    rays = [Objects.Ray(list((-1,0))),
-            Objects.Ray(list((1,0))),
+    rays = [
+
+            Objects.Ray(list((0.001,1))),
+            Objects.Ray(list((0.001,0.5))),
+
+            Objects.Ray(list((0.001,-1))),
+            Objects.Ray(list((0.001,-0.5))),
+
+            Objects.Ray(list((-1,0.001))),
+            Objects.Ray(list((-0.5,0.001))),
+
+            Objects.Ray(list((1,0.001))),
+            Objects.Ray(list((0.5,0.001))),
+
             Objects.Ray(list((1,1))),
-            Objects.Ray(list((1.5,1))),
-            Objects.Ray(list((2.5,1))),
-            Objects.Ray(list((4,1))),
+            Objects.Ray(list((0.5,1))),
+
             Objects.Ray(list((-1,-1))),
-            Objects.Ray(list((-1.5,-1))),
-            Objects.Ray(list((-2.5,-1))),
-            Objects.Ray(list((-4,-1))),
+            Objects.Ray(list((-0.5,-1))),
+
             Objects.Ray(list((1,-1))),
-            Objects.Ray(list((1.5,-1))),
-            Objects.Ray(list((2.5,-1))),
-            Objects.Ray(list((4,-1))),
+            Objects.Ray(list((0.5,-1))),
+
             Objects.Ray(list((-1,1))),
-            Objects.Ray(list((-1.5,1))),
-            Objects.Ray(list((-2.5,1))),
-            Objects.Ray(list((-4,1)))]    
+            Objects.Ray(list((-1,0.5)))]    
     return rays   
 
 def Draw_Window(screen, Rays, Boundaries):
